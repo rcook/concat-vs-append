@@ -1,0 +1,12 @@
+#!/bin/bash
+set -euo pipefail
+
+this_dir=$(cd $(dirname $0); pwd -P)
+repo_dir=$(dirname $this_dir)
+
+cd $repo_dir
+rm -rf bench.html
+stack clean
+stack build
+stack exec -- concat-vs-append --output bench.html
+open bench.html
